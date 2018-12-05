@@ -1,6 +1,7 @@
 package com.study.controller;
 
 import com.study.common.ResultData;
+import com.study.model.base.SysUser;
 import com.study.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,14 +27,14 @@ public class DefaultController {
 
     @ApiOperation(value = "查询所有用户信息",notes = "查询所有用户信息")
     @RequestMapping(value = "listUsers",method = RequestMethod.GET)
-    public ResultData<User> listUsers(@ApiParam(value = "userId",required = true)@RequestParam(value = "userId",required = true) String userId){
+    public ResultData<SysUser> listUsers(@ApiParam(value = "userId",required = true)@RequestParam(value = "userId",required = true) String userId){
 
-        return new ResultData<User>(200,"查询成功",userService.listUsers());
+        return new ResultData<SysUser>(200,"查询成功",userService.listUsers());
     }
 
     @ApiOperation(value = "分页查询所有用户信息",notes = "分页查询所有用户信息")
     @RequestMapping(value = "pageInfoUsers",method = RequestMethod.GET)
-    public ResultData<User> pageInfoUsers(@ApiParam(value = "第几页",defaultValue = "1")@RequestParam(value = "pageNum",defaultValue = "1") int pageNum){
-        return new ResultData<User>(200,"查询成功",userService.pageInfoUsers(pageNum));
+    public ResultData<SysUser> pageInfoUsers(@ApiParam(value = "第几页",defaultValue = "1")@RequestParam(value = "pageNum",defaultValue = "1") int pageNum){
+        return new ResultData<SysUser>(200,"查询成功",userService.pageInfoUsers(pageNum));
     }
 }

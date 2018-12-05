@@ -1,12 +1,13 @@
 package com.study.service;
 
 import com.github.pagehelper.PageInfo;
+import com.study.model.base.SysUser;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<User> listUsers();
+    List<SysUser> listUsers();
 
-    PageInfo<User> pageInfoUsers(int pageNum);
+    PageInfo<SysUser> pageInfoUsers(int pageNum);
 }
