@@ -1,4 +1,4 @@
-package com.study.model;
+package com.study.model.base;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -105,73 +105,73 @@ public class SysRoleExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andRoleFlowIsNull() {
-            addCriterion("role_flow is null");
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowIsNotNull() {
-            addCriterion("role_flow is not null");
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowEqualTo(String value) {
-            addCriterion("role_flow =", value, "roleFlow");
+        public Criteria andIdEqualTo(String value) {
+            addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowNotEqualTo(String value) {
-            addCriterion("role_flow <>", value, "roleFlow");
+        public Criteria andIdNotEqualTo(String value) {
+            addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowGreaterThan(String value) {
-            addCriterion("role_flow >", value, "roleFlow");
+        public Criteria andIdGreaterThan(String value) {
+            addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowGreaterThanOrEqualTo(String value) {
-            addCriterion("role_flow >=", value, "roleFlow");
+        public Criteria andIdGreaterThanOrEqualTo(String value) {
+            addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowLessThan(String value) {
-            addCriterion("role_flow <", value, "roleFlow");
+        public Criteria andIdLessThan(String value) {
+            addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowLessThanOrEqualTo(String value) {
-            addCriterion("role_flow <=", value, "roleFlow");
+        public Criteria andIdLessThanOrEqualTo(String value) {
+            addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowLike(String value) {
-            addCriterion("role_flow like", value, "roleFlow");
+        public Criteria andIdLike(String value) {
+            addCriterion("id like", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowNotLike(String value) {
-            addCriterion("role_flow not like", value, "roleFlow");
+        public Criteria andIdNotLike(String value) {
+            addCriterion("id not like", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowIn(List<String> values) {
-            addCriterion("role_flow in", values, "roleFlow");
+        public Criteria andIdIn(List<String> values) {
+            addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowNotIn(List<String> values) {
-            addCriterion("role_flow not in", values, "roleFlow");
+        public Criteria andIdNotIn(List<String> values) {
+            addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowBetween(String value1, String value2) {
-            addCriterion("role_flow between", value1, value2, "roleFlow");
+        public Criteria andIdBetween(String value1, String value2) {
+            addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andRoleFlowNotBetween(String value1, String value2) {
-            addCriterion("role_flow not between", value1, value2, "roleFlow");
+        public Criteria andIdNotBetween(String value1, String value2) {
+            addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
 
@@ -315,73 +315,73 @@ public class SysRoleExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkIsNull() {
-            addCriterion("delete_mark is null");
+        public Criteria andDelMarkIsNull() {
+            addCriterion("del_mark is null");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkIsNotNull() {
-            addCriterion("delete_mark is not null");
+        public Criteria andDelMarkIsNotNull() {
+            addCriterion("del_mark is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkEqualTo(String value) {
-            addCriterion("delete_mark =", value, "deleteMark");
+        public Criteria andDelMarkEqualTo(String value) {
+            addCriterion("del_mark =", value, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkNotEqualTo(String value) {
-            addCriterion("delete_mark <>", value, "deleteMark");
+        public Criteria andDelMarkNotEqualTo(String value) {
+            addCriterion("del_mark <>", value, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkGreaterThan(String value) {
-            addCriterion("delete_mark >", value, "deleteMark");
+        public Criteria andDelMarkGreaterThan(String value) {
+            addCriterion("del_mark >", value, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkGreaterThanOrEqualTo(String value) {
-            addCriterion("delete_mark >=", value, "deleteMark");
+        public Criteria andDelMarkGreaterThanOrEqualTo(String value) {
+            addCriterion("del_mark >=", value, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkLessThan(String value) {
-            addCriterion("delete_mark <", value, "deleteMark");
+        public Criteria andDelMarkLessThan(String value) {
+            addCriterion("del_mark <", value, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkLessThanOrEqualTo(String value) {
-            addCriterion("delete_mark <=", value, "deleteMark");
+        public Criteria andDelMarkLessThanOrEqualTo(String value) {
+            addCriterion("del_mark <=", value, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkLike(String value) {
-            addCriterion("delete_mark like", value, "deleteMark");
+        public Criteria andDelMarkLike(String value) {
+            addCriterion("del_mark like", value, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkNotLike(String value) {
-            addCriterion("delete_mark not like", value, "deleteMark");
+        public Criteria andDelMarkNotLike(String value) {
+            addCriterion("del_mark not like", value, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkIn(List<String> values) {
-            addCriterion("delete_mark in", values, "deleteMark");
+        public Criteria andDelMarkIn(List<String> values) {
+            addCriterion("del_mark in", values, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkNotIn(List<String> values) {
-            addCriterion("delete_mark not in", values, "deleteMark");
+        public Criteria andDelMarkNotIn(List<String> values) {
+            addCriterion("del_mark not in", values, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkBetween(String value1, String value2) {
-            addCriterion("delete_mark between", value1, value2, "deleteMark");
+        public Criteria andDelMarkBetween(String value1, String value2) {
+            addCriterion("del_mark between", value1, value2, "delMark");
             return (Criteria) this;
         }
 
-        public Criteria andDeleteMarkNotBetween(String value1, String value2) {
-            addCriterion("delete_mark not between", value1, value2, "deleteMark");
+        public Criteria andDelMarkNotBetween(String value1, String value2) {
+            addCriterion("del_mark not between", value1, value2, "delMark");
             return (Criteria) this;
         }
 
@@ -505,73 +505,213 @@ public class SysRoleExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowIsNull() {
-            addCriterion("user_flow is null");
+        public Criteria andCreateByIsNull() {
+            addCriterion("create_by is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowIsNotNull() {
-            addCriterion("user_flow is not null");
+        public Criteria andCreateByIsNotNull() {
+            addCriterion("create_by is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowEqualTo(String value) {
-            addCriterion("user_flow =", value, "userFlow");
+        public Criteria andCreateByEqualTo(String value) {
+            addCriterion("create_by =", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowNotEqualTo(String value) {
-            addCriterion("user_flow <>", value, "userFlow");
+        public Criteria andCreateByNotEqualTo(String value) {
+            addCriterion("create_by <>", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowGreaterThan(String value) {
-            addCriterion("user_flow >", value, "userFlow");
+        public Criteria andCreateByGreaterThan(String value) {
+            addCriterion("create_by >", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowGreaterThanOrEqualTo(String value) {
-            addCriterion("user_flow >=", value, "userFlow");
+        public Criteria andCreateByGreaterThanOrEqualTo(String value) {
+            addCriterion("create_by >=", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowLessThan(String value) {
-            addCriterion("user_flow <", value, "userFlow");
+        public Criteria andCreateByLessThan(String value) {
+            addCriterion("create_by <", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowLessThanOrEqualTo(String value) {
-            addCriterion("user_flow <=", value, "userFlow");
+        public Criteria andCreateByLessThanOrEqualTo(String value) {
+            addCriterion("create_by <=", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowLike(String value) {
-            addCriterion("user_flow like", value, "userFlow");
+        public Criteria andCreateByLike(String value) {
+            addCriterion("create_by like", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowNotLike(String value) {
-            addCriterion("user_flow not like", value, "userFlow");
+        public Criteria andCreateByNotLike(String value) {
+            addCriterion("create_by not like", value, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowIn(List<String> values) {
-            addCriterion("user_flow in", values, "userFlow");
+        public Criteria andCreateByIn(List<String> values) {
+            addCriterion("create_by in", values, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowNotIn(List<String> values) {
-            addCriterion("user_flow not in", values, "userFlow");
+        public Criteria andCreateByNotIn(List<String> values) {
+            addCriterion("create_by not in", values, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowBetween(String value1, String value2) {
-            addCriterion("user_flow between", value1, value2, "userFlow");
+        public Criteria andCreateByBetween(String value1, String value2) {
+            addCriterion("create_by between", value1, value2, "createBy");
             return (Criteria) this;
         }
 
-        public Criteria andUserFlowNotBetween(String value1, String value2) {
-            addCriterion("user_flow not between", value1, value2, "userFlow");
+        public Criteria andCreateByNotBetween(String value1, String value2) {
+            addCriterion("create_by not between", value1, value2, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByIsNull() {
+            addCriterion("update_by is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByIsNotNull() {
+            addCriterion("update_by is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByEqualTo(String value) {
+            addCriterion("update_by =", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByNotEqualTo(String value) {
+            addCriterion("update_by <>", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByGreaterThan(String value) {
+            addCriterion("update_by >", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByGreaterThanOrEqualTo(String value) {
+            addCriterion("update_by >=", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByLessThan(String value) {
+            addCriterion("update_by <", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByLessThanOrEqualTo(String value) {
+            addCriterion("update_by <=", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByLike(String value) {
+            addCriterion("update_by like", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByNotLike(String value) {
+            addCriterion("update_by not like", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByIn(List<String> values) {
+            addCriterion("update_by in", values, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByNotIn(List<String> values) {
+            addCriterion("update_by not in", values, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByBetween(String value1, String value2) {
+            addCriterion("update_by between", value1, value2, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByNotBetween(String value1, String value2) {
+            addCriterion("update_by not between", value1, value2, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksIsNull() {
+            addCriterion("remarks is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksIsNotNull() {
+            addCriterion("remarks is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksEqualTo(String value) {
+            addCriterion("remarks =", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotEqualTo(String value) {
+            addCriterion("remarks <>", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksGreaterThan(String value) {
+            addCriterion("remarks >", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksGreaterThanOrEqualTo(String value) {
+            addCriterion("remarks >=", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksLessThan(String value) {
+            addCriterion("remarks <", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksLessThanOrEqualTo(String value) {
+            addCriterion("remarks <=", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksLike(String value) {
+            addCriterion("remarks like", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotLike(String value) {
+            addCriterion("remarks not like", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksIn(List<String> values) {
+            addCriterion("remarks in", values, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotIn(List<String> values) {
+            addCriterion("remarks not in", values, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksBetween(String value1, String value2) {
+            addCriterion("remarks between", value1, value2, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotBetween(String value1, String value2) {
+            addCriterion("remarks not between", value1, value2, "remarks");
             return (Criteria) this;
         }
     }

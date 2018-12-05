@@ -1,7 +1,6 @@
 package com.study.controller;
 
 import com.study.common.ResultData;
-import com.study.model.User;
 import com.study.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @Api(tags = "用户相关接口")
 @RestController

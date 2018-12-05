@@ -1,7 +1,7 @@
 package com.study.dao.base;
 
-import com.study.model.SysRole;
-import com.study.model.SysRoleExample;
+import com.study.model.base.SysRole;
+import com.study.model.base.SysRoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +10,7 @@ public interface SysRoleMapper {
 
     int deleteByExample(SysRoleExample example);
 
-    int deleteByPrimaryKey(String roleFlow);
+    int deleteByPrimaryKey(String id);
 
     int insert(SysRole record);
 
@@ -18,7 +18,7 @@ public interface SysRoleMapper {
 
     List<SysRole> selectByExample(SysRoleExample example);
 
-    SysRole selectByPrimaryKey(String roleFlow);
+    SysRole selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") SysRole record, @Param("example") SysRoleExample example);
 

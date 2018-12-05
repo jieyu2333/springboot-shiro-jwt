@@ -1,9 +1,9 @@
-package com.study.model;
+package com.study.model.base;
 
 import java.util.Date;
 
 public class SysUser {
-    private String userFlow;
+    private String id;
 
     private String userName;
 
@@ -13,26 +13,34 @@ public class SysUser {
 
     private String idNum;
 
+    private String mobile;
+
+    private String email;
+
     private Integer age;
 
-    private Integer sex;
+    private String sex;
 
     private String address;
 
     private String useMark;
 
-    private String deleteMark;
+    private String delMark;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public String getUserFlow() {
-        return userFlow;
+    private String createBy;
+
+    private String updateBy;
+
+    public String getId() {
+        return id;
     }
 
-    public void setUserFlow(String userFlow) {
-        this.userFlow = userFlow == null ? null : userFlow.trim();
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     public String getUserName() {
@@ -67,6 +75,22 @@ public class SysUser {
         this.idNum = idNum == null ? null : idNum.trim();
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
     public Integer getAge() {
         return age;
     }
@@ -75,12 +99,12 @@ public class SysUser {
         this.age = age;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
-        this.sex = sex;
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
     }
 
     public String getAddress() {
@@ -99,12 +123,12 @@ public class SysUser {
         this.useMark = useMark == null ? null : useMark.trim();
     }
 
-    public String getDeleteMark() {
-        return deleteMark;
+    public String getDelMark() {
+        return delMark;
     }
 
-    public void setDeleteMark(String deleteMark) {
-        this.deleteMark = deleteMark == null ? null : deleteMark.trim();
+    public void setDelMark(String delMark) {
+        this.delMark = delMark == null ? null : delMark.trim();
     }
 
     public Date getCreateTime() {
@@ -121,5 +145,21 @@ public class SysUser {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy == null ? null : createBy.trim();
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy == null ? null : updateBy.trim();
     }
 }

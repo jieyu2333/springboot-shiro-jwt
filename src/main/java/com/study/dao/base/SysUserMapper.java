@@ -1,7 +1,7 @@
 package com.study.dao.base;
 
-import com.study.model.SysUser;
-import com.study.model.SysUserExample;
+import com.study.model.base.SysUser;
+import com.study.model.base.SysUserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +10,7 @@ public interface SysUserMapper {
 
     int deleteByExample(SysUserExample example);
 
-    int deleteByPrimaryKey(String userFlow);
+    int deleteByPrimaryKey(String id);
 
     int insert(SysUser record);
 
@@ -18,7 +18,7 @@ public interface SysUserMapper {
 
     List<SysUser> selectByExample(SysUserExample example);
 
-    SysUser selectByPrimaryKey(String userFlow);
+    SysUser selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") SysUser record, @Param("example") SysUserExample example);
 
