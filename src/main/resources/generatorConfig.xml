@@ -40,7 +40,8 @@
 		</javaClientGenerator>
 
 		<!-- table表生成对应的DoaminObject -->
-		<table tableName="user" domainObjectName="User"></table>
+		<table tableName="sys_user"></table>
+		<table tableName="sys_role"></table>
 
 	</context>
 
