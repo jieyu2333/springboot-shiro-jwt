@@ -35,6 +35,8 @@ public class SysUser {
 
     private String updateBy;
 
+    private Date lastLoginTime;
+
     public String getId() {
         return id;
     }
@@ -161,5 +163,13 @@ public class SysUser {
 
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy == null ? null : updateBy.trim();
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }
