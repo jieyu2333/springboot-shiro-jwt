@@ -11,6 +11,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +29,7 @@ public class MyRealm extends AuthorizingRealm {
     /*https://www.jianshu.com/p/672abf94a857?winzoom=1*/
     @Autowired
     private SysUserMapper sysUserMapper;
+
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -63,7 +66,7 @@ public class MyRealm extends AuthorizingRealm {
         System.out.println("身份认证方法：MyShiroRealm.doGetAuthenticationInfo()");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String userName = token.getUsername();
-        String password = String.valueOf(token.getPassword());
+        String password = token.getPassword()==null?null:String.valueOf(token.getPassword());
         SysUser user = null;
         // 从数据库获取对应用户名密码的用户
         SysUserExample sysUserExample = new SysUserExample();
