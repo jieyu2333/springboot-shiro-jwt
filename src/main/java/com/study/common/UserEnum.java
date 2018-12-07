@@ -3,6 +3,10 @@ package com.study.common;
 public enum UserEnum {
 
     SUCCESS(200,"查询成功！"),
+
+    SUCCESS_LOGIN(200,"登录成功！"),
+    ERROR_ACCOUNT(401,"账号不存在！"),
+    ERROR_PASSWORD(401,"密码错误！"),
     ERROR_ACCOUNT_PASSWORD(401,"账号或密码错误！"),
     ACCOUNT_DISABLED(401,"账号已被禁止登录！"),
 

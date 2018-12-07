@@ -3,7 +3,8 @@
 <mapper namespace="com.study.dao.base.SysRoleMapper" >
   <resultMap id="BaseResultMap" type="com.study.model.base.SysRole" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
     <result column="use_mark" property="useMark" jdbcType="CHAR" />
     <result column="del_mark" property="delMark" jdbcType="CHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, role_name, use_mark, del_mark, create_time, update_time, create_by, update_by, 
+    id, name, role, use_mark, del_mark, create_time, update_time, create_by, update_by, 
     remarks
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.study.model.base.SysRoleExample" >
@@ -105,14 +106,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.study.model.base.SysRole" >
-    insert into sys_role (id, role_name, use_mark, 
-      del_mark, create_time, update_time, 
-      create_by, update_by, remarks
-      )
-    values (#{id,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{useMark,jdbcType=CHAR}, 
-      #{delMark,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
-      )
+    insert into sys_role (id, name, role, 
+      use_mark, del_mark, create_time, 
+      update_time, create_by, update_by, 
+      remarks)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
+      #{useMark,jdbcType=CHAR}, #{delMark,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.study.model.base.SysRole" >
     insert into sys_role
@@ -120,8 +121,11 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="roleName != null" >
-        role_name,
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="role != null" >
+        role,
       </if>
       <if test="useMark != null" >
         use_mark,
@@ -149,8 +153,11 @@
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="roleName != null" >
-        #{roleName,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
       </if>
       <if test="useMark != null" >
         #{useMark,jdbcType=CHAR},
@@ -187,8 +194,11 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.roleName != null" >
-        role_name = #{record.roleName,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null" >
+        role = #{record.role,jdbcType=VARCHAR},
       </if>
       <if test="record.useMark != null" >
         use_mark = #{record.useMark,jdbcType=CHAR},
@@ -219,7 +229,8 @@
   <update id="updateByExample" parameterType="map" >
     update sys_role
     set id = #{record.id,jdbcType=VARCHAR},
-      role_name = #{record.roleName,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=VARCHAR},
       use_mark = #{record.useMark,jdbcType=CHAR},
       del_mark = #{record.delMark,jdbcType=CHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -234,8 +245,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.study.model.base.SysRole" >
     update sys_role
     <set >
-      <if test="roleName != null" >
-        role_name = #{roleName,jdbcType=VARCHAR},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
       </if>
       <if test="useMark != null" >
         use_mark = #{useMark,jdbcType=CHAR},
@@ -263,7 +277,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.study.model.base.SysRole" >
     update sys_role
-    set role_name = #{roleName,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
       use_mark = #{useMark,jdbcType=CHAR},
       del_mark = #{delMark,jdbcType=CHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

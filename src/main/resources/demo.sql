@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local_mysql
-Source Server Version : 50623
+Source Server         : localhost
+Source Server Version : 50724
 Source Host           : localhost:3306
 Source Database       : demo
 
 Target Server Type    : MYSQL
-Target Server Version : 50623
+Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2018-12-06 00:46:44
+Date: 2018-12-07 17:32:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for sys_menu
+-- Table structure for `sys_menu`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu` (
@@ -159,12 +159,13 @@ INSERT INTO `sys_menu` VALUES ('f3805509eade4ba0a6374acec99153bb', '609fabb1567f
 INSERT INTO `sys_menu` VALUES ('f4f5289aa67348d5b5c4ae1f83f3b926', '5a5312366d314319afe713d201fb632a', '0,1,e99a56f2af7b468e887287f7c99f2b18,5a5312366d314319afe713d201fb632a,', '资助生源地分析', '60', '', '', '', '1', '', '1', '2018-01-29 14:49:00', '1', '2018-01-29 14:49:00', '', '0');
 
 -- ----------------------------
--- Table structure for sys_role
+-- Table structure for `sys_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
   `id` varchar(32) NOT NULL COMMENT '角色主键',
-  `role_name` varchar(50) DEFAULT NULL COMMENT '角色名',
+  `name` varchar(10) DEFAULT NULL COMMENT '角色名',
+  `role` varchar(32) DEFAULT NULL COMMENT '角色值',
   `use_mark` char(1) DEFAULT 'Y' COMMENT '使用标记，Y启用，N停用',
   `del_mark` char(1) DEFAULT '0' COMMENT '删除标记，1删除，0未删除',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -178,10 +179,12 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', '11', 'Y', 'Y', '2018-12-05 23:46:53', '2018-12-05 23:46:53', '1', '1', null);
+INSERT INTO `sys_role` VALUES ('1', '最高管理员', 'superadmin', 'Y', '0', '2018-12-07 15:04:50', '2018-12-07 15:04:50', '1', '1', null);
+INSERT INTO `sys_role` VALUES ('2', '管理员', 'admin', 'Y', '0', '2018-12-07 15:04:55', '2018-12-07 15:04:55', '1', '1', null);
+INSERT INTO `sys_role` VALUES ('3', '普通用户', 'user', 'Y', '0', '2018-12-07 17:17:25', '2018-12-07 17:17:25', '1', '1', null);
 
 -- ----------------------------
--- Table structure for sys_role_menu
+-- Table structure for `sys_role_menu`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu` (
@@ -465,7 +468,7 @@ INSERT INTO `sys_role_menu` VALUES ('3', '9');
 INSERT INTO `sys_role_menu` VALUES ('3', '90');
 
 -- ----------------------------
--- Table structure for sys_user
+-- Table structure for `sys_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
@@ -485,17 +488,19 @@ CREATE TABLE `sys_user` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `create_by` varchar(32) DEFAULT NULL COMMENT '创建人',
   `update_by` varchar(32) DEFAULT NULL COMMENT '更新人',
+  `last_login_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '最后登陆时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '11', '111', '1', '1', '11', null, '1', '1', '11', 'Y', 'Y', '2018-12-05 16:56:13', '2018-12-05 23:37:12', '1', '1');
-INSERT INTO `sys_user` VALUES ('2', '22', '111', '1', '1', '1', null, '1', '2', '11', 'Y', 'Y', '2018-12-05 16:56:26', '2018-12-05 23:37:16', '1', '4');
+INSERT INTO `sys_user` VALUES ('1', '11', '111', '1', '1', '11', null, '1', '1', '11', 'Y', '0', '2018-12-05 16:56:13', '2018-12-06 14:17:27', '1', '1', '2018-12-07 16:55:11');
+INSERT INTO `sys_user` VALUES ('2', '22', '111', '1', '1', '1', null, '1', '2', '11', 'Y', '0', '2018-12-05 16:56:26', '2018-12-06 14:17:29', '1', '4', '2018-12-07 16:55:21');
+INSERT INTO `sys_user` VALUES ('3', '33', '111', '1', '1', '1', null, '1', '1', '1', 'Y', '0', '2018-12-07 17:15:37', '2018-12-07 17:15:37', '1', '1', '2018-12-07 17:31:13');
 
 -- ----------------------------
--- Table structure for sys_user_role
+-- Table structure for `sys_user_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role` (
@@ -507,3 +512,5 @@ CREATE TABLE `sys_user_role` (
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
+INSERT INTO `sys_user_role` VALUES ('1', '1');
+INSERT INTO `sys_user_role` VALUES ('2', '2');
