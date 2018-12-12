@@ -9,7 +9,7 @@
         出现错误：Caused by: java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
         解决办法：将本地的MAVEN仓库中的mysql驱动引入进来
     -->
-	<classPathEntry location="D:\maven\maven_repository\mysql\mysql-connector-java\5.1.41\mysql-connector-java-5.1.41.jar"/>
+	<classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.31\mysql-connector-java-5.1.31.jar"/>
 
 	<context id="mysqlgenerator" targetRuntime="MyBatis3">
 		<!--不生成注释-->
@@ -20,7 +20,7 @@
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 						connectionURL="jdbc:mysql://localhost:3306/demo"
 						userId="root"
-						password="1234" />
+						password="123456" />
 
 		<!-- 指定javaBean生成的位置 -->
 		<javaModelGenerator targetPackage="com.study.model.base" targetProject="src/main/java" >
@@ -40,11 +40,12 @@
 		</javaClientGenerator>
 
 		<!-- table表生成对应的DoaminObject -->
-		<table tableName="sys_user"></table>
-		<table tableName="sys_role"></table>
-		<table tableName="sys_user_role"></table>
+		<table tableName=""></table>
+		<!--<table tableName="sys_user"></table>-->
+		<!--<table tableName="sys_role"></table>-->
+		<!--<table tableName="sys_user_role"></table>
 		<table tableName="sys_menu"></table>
-		<table tableName="sys_role_menu"></table>
+		<table tableName="sys_role_menu"></table>-->
 
 	</context>
 
