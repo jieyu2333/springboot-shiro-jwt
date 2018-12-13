@@ -28,12 +28,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/login")
 public class LoginController {
 
-    @ApiOperation(value = "前往登录页", notes = "前往登录页")
-    @RequestMapping(value = "toLogin",method = RequestMethod.GET)
-    public ModelAndView toLogin(){
-        ModelAndView mav = new ModelAndView("login");
-        return mav;
-    }
 
     @ApiOperation(value = "用户登录", notes = "用户登录")
     @RequestMapping(value = "doLogin", method = RequestMethod.POST)
@@ -45,7 +39,7 @@ public class LoginController {
             Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
             subject.login(token);
-            return new ResultData(UserEnum.SUCCESS_LOGIN.getCode(), UserEnum.SUCCESS_LOGIN.getMsg(),subject.getPrincipal());
+            return new ResultData(UserEnum.SUCCESS_LOGIN.getCode(), UserEnum.SUCCESS_LOGIN.getMsg(),subject.getSession().getId());
         } catch (UnknownAccountException e) {
             e.printStackTrace();
             return new ResultData(UserEnum.ERROR_ACCOUNT.getCode(), UserEnum.ERROR_ACCOUNT.getMsg());

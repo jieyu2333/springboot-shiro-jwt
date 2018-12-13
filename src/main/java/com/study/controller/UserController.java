@@ -20,6 +20,7 @@ public class UserController {
     private UserService userService;
 
 
+    @RequiresRoles(value = "admin")
     @ApiOperation(value = "查询所有用户信息", notes = "查询所有用户信息")
     @RequestMapping(method = RequestMethod.GET)
     public ResultData<SysUser> listUsers() {
