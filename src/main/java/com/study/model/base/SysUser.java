@@ -1,8 +1,11 @@
 package com.study.model.base;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SysUser {
+public class SysUser implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     private String userName;
