@@ -35,7 +35,7 @@ public class ShiroConfig {
     private int port;
     @Value("${spring.redis.timeout}")
     private int timeout;
-    //@Value("${spring.redis.password}")
+    @Value("${spring.redis.password}")
     private String password;
 
     /**
@@ -160,7 +160,7 @@ public class ShiroConfig {
         securityManager.setSessionManager(sessionManager());
 
         // 自定义缓存实现 使用redis
-        securityManager.setCacheManager(cacheManager());
+        //securityManager.setCacheManager(cacheManager());
         return securityManager;
     }
 

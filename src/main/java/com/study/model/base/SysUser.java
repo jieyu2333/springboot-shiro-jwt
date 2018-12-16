@@ -1,5 +1,6 @@
 package com.study.model.base;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,6 +9,7 @@ public class SysUser implements Serializable {
 
     private String id;
 
+    @NotNull(message = "用户名不能为空")
     private String userName;
 
     private String password;

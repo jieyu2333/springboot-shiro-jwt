@@ -9,6 +9,7 @@ import com.study.dao.ext.SysUserRoleExtMapper;
 import com.study.model.base.*;
 import com.study.model.ext.SysRoleMenuExt;
 import com.study.model.ext.SysUserRoleExt;
+import com.study.utils.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -16,6 +17,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -58,8 +60,10 @@ public class MyRealm extends AuthorizingRealm {
         //根据用户ID查询权限（permission），放入到Authorization里。
         List<SysRoleMenuExt> sysRoleMenuKeys = sysRoleMenuExtMapper.listMenus(userId);
         Set<String> permissionSet = new HashSet<>();
-        for(SysRoleMenuExt Permission : sysRoleMenuKeys){
-            permissionSet.add(Permission.getName());
+        for(SysRoleMenuExt permission : sysRoleMenuKeys){
+            if (StringUtils.isNotBlank(permission.getPermission())){
+                permissionSet.add(permission.getPermission());
+            }
         }
         info.setStringPermissions(permissionSet);
         return info;
