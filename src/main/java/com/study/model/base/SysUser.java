@@ -1,6 +1,15 @@
 package com.study.model.base;
 
-import javax.validation.constraints.NotNull;
+import com.study.utils.validate.DelMarkValidate;
+import com.study.utils.validate.IdNumValidate;
+import com.study.utils.validate.PhoneValidate;
+import com.study.utils.validate.UseMarkValidate;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,27 +18,36 @@ public class SysUser implements Serializable {
 
     private String id;
 
-    @NotNull(message = "用户名不能为空")
+    @NotBlank(message = "用户名不能为空")
     private String userName;
 
+    @NotBlank(message = "密码不能为空")
     private String password;
 
     private String name;
 
+    @IdNumValidate
     private String idNum;
 
+    @PhoneValidate
     private String mobile;
 
+    @Email(message = "邮箱格式错误")
     private String email;
 
+    @Min(value = 0,message = "年龄必须大于0")
+    @Max(value = 200,message = "年龄必须小于200")
     private Integer age;
 
+    @Length(min = 1,max = 1,message = "性别格式错误")
     private String sex;
 
     private String address;
 
+    @UseMarkValidate
     private String useMark;
 
+    @DelMarkValidate
     private String delMark;
 
     private Date createTime;

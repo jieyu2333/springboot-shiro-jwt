@@ -1,5 +1,6 @@
 package com.study.config;
 
+import com.study.common.UserEnum;
 import com.study.exception.MyExceptionHandler;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -61,6 +62,7 @@ public class ShiroConfig {
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/login/**", "anon");
+        filterChainDefinitionMap.put("/user/register","anon");
         //swagger不拦截
         //swagger接口权限 开放
         filterChainDefinitionMap.put("/swagger-ui.html", "anon");
@@ -98,8 +100,8 @@ public class ShiroConfig {
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于 md5(md5(""));
+        hashedCredentialsMatcher.setHashAlgorithmName(UserEnum.ENCRYPTION.getKey());//散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashIterations(UserEnum.ENCRYPTION_TIMES.getCode());//散列的次数，比如散列两次，相当于 md5(md5(""));
         return hashedCredentialsMatcher;
     }
 

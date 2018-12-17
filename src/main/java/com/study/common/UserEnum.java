@@ -2,7 +2,13 @@ package com.study.common;
 
 public enum UserEnum {
 
-    SUCCESS(200,"查询成功！"),
+    SELECT_SUCCESS(200,"查询成功！"),
+    REGISTER_SUCCESS(200,"注册成功！"),
+    REGISTER_ERROR(400,"注册失败！"),
+    USER_EXIST(400,"用户名已注册！"),
+
+    ENCRYPTION("MD5","加密方式"),
+    ENCRYPTION_TIMES(1024,"加密次数"),
 
 
     SUCCESS_LOGIN(200,"登录成功！"),
@@ -10,14 +16,11 @@ public enum UserEnum {
     ERROR_PASSWORD(401,"密码错误！"),
     ERROR_ACCOUNT_PASSWORD(401,"账号或密码错误！"),
     ACCOUNT_DISABLED(401,"账号已被禁止登录！"),
+    ERROR_TOKEN(401,"token错误或失效！"),
     TO_LOGIN(401,"请先登录！"),
-    NO_PERMISSION(403,"无权限！"),
+    NO_PERMISSION(403,"无权限！")
 
-    USE_MARK("Y","启用"),
-    NO_USE_MARK("N","停用"),
 
-    DEL_MARK("1","删除"),
-    NO_DEL_MARK("0","未删除")
 
 
     ;

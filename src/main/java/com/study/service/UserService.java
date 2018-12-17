@@ -12,4 +12,6 @@ public interface UserService {
     ResultData<SysUser> listUsers();
 
     ResultData<SysUser> pageUsers(BaseForm baseForm);
+
+    ResultData saveUser(SysUser sysUser);
 }

@@ -1,5 +1,6 @@
 package com.study.config;
 
+import com.study.common.GlobalEnum;
 import com.study.common.UserEnum;
 import com.study.dao.base.SysRoleMenuMapper;
 import com.study.dao.base.SysUserMapper;
@@ -16,6 +17,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -78,7 +80,7 @@ public class MyRealm extends AuthorizingRealm {
         SysUser user = null;
         // 从数据库获取对应用户名的用户
         SysUserExample sysUserExample = new SysUserExample();
-        sysUserExample.createCriteria().andUserNameEqualTo(userName).andDelMarkEqualTo(UserEnum.NO_DEL_MARK.getKey());
+        sysUserExample.createCriteria().andUserNameEqualTo(userName).andDelMarkEqualTo(GlobalEnum.NO_DEL_MARK.getKey());
         List<SysUser> userList = sysUserMapper.selectByExample(sysUserExample);
         if(userList==null||userList.size()!=1){
             throw new UnknownAccountException(UserEnum.ERROR_ACCOUNT.getMsg());
@@ -86,13 +88,14 @@ public class MyRealm extends AuthorizingRealm {
         user = userList.get(0);
         if (!user.getPassword().equals(password)) {
             throw new IncorrectCredentialsException(UserEnum.ERROR_PASSWORD.getMsg());
-        }else if(UserEnum.NO_USE_MARK.equals(user.getUseMark())){
+        }else if(GlobalEnum.NO_USE_MARK.equals(user.getUseMark())){
             throw new LockedAccountException(UserEnum.ACCOUNT_DISABLED.getMsg());
         }else{
             //更新登录时间lastLoginTime
             user.setLastLoginTime(new Date());
             sysUserMapper.updateByPrimaryKeySelective(user);
         }
-        return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+        ByteSource credentialsSalt = ByteSource.Util.bytes(user.getId());//盐值
+        return new SimpleAuthenticationInfo(user, user.getPassword(),credentialsSalt ,getName());
     }
 }
