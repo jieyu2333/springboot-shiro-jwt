@@ -1,7 +1,10 @@
 package com.study.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.study.common.ResultData;
 import com.study.common.UserEnum;
+import com.study.model.base.SysUser;
+import com.study.service.UserService;
 import com.study.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +14,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +32,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/login")
 public class LoginController {
 
+    @Autowired
+    private UserService userService;
+
 
     @ApiOperation(value = "用户登录", notes = "用户登录")
     @RequestMapping(value = "doLogin", method = RequestMethod.POST)
@@ -39,6 +46,9 @@ public class LoginController {
             Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
             subject.login(token);
+            SysUser sysUser = (SysUser) subject.getPrincipal();
+            //更新最后登陆时间
+            userService.updateLoginTime(sysUser.getId());
             return new ResultData(UserEnum.SUCCESS_LOGIN.getCode(), UserEnum.SUCCESS_LOGIN.getMsg(),subject.getSession().getId());
         } catch (UnknownAccountException e) {
             e.printStackTrace();
@@ -54,8 +64,8 @@ public class LoginController {
     }
 
     @ApiOperation(value = "注销登录", notes = "注销登录")
-    @RequestMapping(value = "logOut",method = RequestMethod.POST)
-    public void logOut(){
+    @RequestMapping(value = "logout",method = RequestMethod.POST)
+    public void logout(){
         SecurityUtils.getSubject().logout();
     }
 }

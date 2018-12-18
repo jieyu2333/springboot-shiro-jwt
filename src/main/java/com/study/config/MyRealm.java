@@ -86,14 +86,8 @@ public class MyRealm extends AuthorizingRealm {
             throw new UnknownAccountException(UserEnum.ERROR_ACCOUNT.getMsg());
         }
         user = userList.get(0);
-        if (!user.getPassword().equals(password)) {
-            throw new IncorrectCredentialsException(UserEnum.ERROR_PASSWORD.getMsg());
-        }else if(GlobalEnum.NO_USE_MARK.equals(user.getUseMark())){
+        if(GlobalEnum.NO_USE_MARK.equals(user.getUseMark())){
             throw new LockedAccountException(UserEnum.ACCOUNT_DISABLED.getMsg());
-        }else{
-            //更新登录时间lastLoginTime
-            user.setLastLoginTime(new Date());
-            sysUserMapper.updateByPrimaryKeySelective(user);
         }
         ByteSource credentialsSalt = ByteSource.Util.bytes(user.getId());//盐值
         return new SimpleAuthenticationInfo(user, user.getPassword(),credentialsSalt ,getName());

@@ -3,12 +3,24 @@ package com.study.common;
 public enum UserEnum {
 
     SELECT_SUCCESS(200,"查询成功！"),
+    SELECT_ERROR(400,"查询失败！"),
+
+    UPDATE_SUCCESS(200,"更新成功！"),
+    UPDATE_ERROR(400,"更新失败！"),
+
+    DELETE_SUCCESS(200,"删除成功！"),
+    DELETE_ERROR(400,"删除失败！"),
+
     REGISTER_SUCCESS(200,"注册成功！"),
     REGISTER_ERROR(400,"注册失败！"),
     USER_EXIST(400,"用户名已注册！"),
 
     ENCRYPTION("MD5","加密方式"),
     ENCRYPTION_TIMES(1024,"加密次数"),
+
+    SUPER_ADMIN("1","最高管理员"),
+    ADMIN("2","管理员"),
+    USER("3","普通用户"),
 
 
     SUCCESS_LOGIN(200,"登录成功！"),

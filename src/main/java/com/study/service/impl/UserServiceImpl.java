@@ -7,9 +7,14 @@ import com.study.common.GlobalEnum;
 import com.study.common.ResultData;
 import com.study.common.UserEnum;
 import com.study.common.form.BaseForm;
+import com.study.dao.base.SysRoleMapper;
 import com.study.dao.base.SysUserMapper;
+import com.study.dao.base.SysUserRoleMapper;
+import com.study.dao.ext.SysUserRoleExtMapper;
+import com.study.form.UserForm;
 import com.study.model.base.SysUser;
 import com.study.model.base.SysUserExample;
+import com.study.model.base.SysUserRoleKey;
 import com.study.service.UserService;
 import com.study.utils.StringUtils;
 import com.study.utils.UUIDUtils;
@@ -19,6 +24,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -30,40 +36,50 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private SysUserMapper userMapper;
 
+
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
+
+
+
     @Override
     public ResultData<SysUser> listUsers() {
         log.info("用户查询开始");
         SysUserExample sysUserExample = new SysUserExample();
         sysUserExample.createCriteria().andUseMarkEqualTo(GlobalEnum.USE_MARK.getKey()).andDelMarkEqualTo(GlobalEnum.NO_DEL_MARK.getKey());
         List<SysUser> list = userMapper.selectByExample(sysUserExample);
-        ResultData<SysUser> resultData = new ResultData<SysUser>(UserEnum.SELECT_SUCCESS.getCode(),UserEnum.SELECT_SUCCESS.getMsg(),list);
-        log.info("用户查询成功，resultData={}",JSON.toJSONString(resultData));
-        log.info("用户查询结束");
+        ResultData<SysUser> resultData = new ResultData<>(UserEnum.SELECT_SUCCESS.getCode(),UserEnum.SELECT_SUCCESS.getMsg(),list);
+        log.info("用户查询结束，出参={}",JSON.toJSONString(resultData));
         return resultData;
     }
 
     @Override
     public ResultData<SysUser> pageUsers(BaseForm baseForm) {
-        log.info("分页查询用户开始");
+        log.info("分页查询用户开始，入参={}",JSON.toJSONString(baseForm));
         PageHelper.startPage(baseForm.getPageNum(),baseForm.getPageSize());
         List<SysUser> list = userMapper.selectByExample(new SysUserExample());
-        PageInfo<SysUser> pageInfo = new PageInfo<SysUser>(list);
+        PageInfo<SysUser> pageInfo = new PageInfo<>(list);
         ResultData<SysUser> resultData = new ResultData<>(UserEnum.SELECT_SUCCESS.getCode(),UserEnum.SELECT_SUCCESS.getMsg(),pageInfo);
-        log.info("用户查询成功，resultData={}",JSON.toJSONString(resultData));
-        log.info("分页查询用户结束");
+        log.info("分页查询用户结束，出参={}",JSON.toJSONString(resultData));
         return resultData;
     }
 
     @Override
-    public ResultData saveUser(SysUser sysUser) {
-        ValidationUtils.validator(sysUser);
+    @Transactional
+    public ResultData saveUser(UserForm userForm) {
+        log.info("注册用户方法开始，入参={}",JSON.toJSONString(userForm));
+        ValidationUtils.validator(userForm);
+        ResultData resultData = null;
         //新增用户
         SysUserExample sysUserExample = new SysUserExample();
-        sysUserExample.createCriteria().andUserNameEqualTo(sysUser.getUserName()).andDelMarkEqualTo(GlobalEnum.NO_DEL_MARK.getKey());
+        sysUserExample.createCriteria().andUserNameEqualTo(userForm.getUserName()).andDelMarkEqualTo(GlobalEnum.NO_DEL_MARK.getKey());
         List<SysUser> sysUsers = userMapper.selectByExample(sysUserExample);
         if (sysUsers!=null&&sysUsers.size()>0){
-            return new ResultData(UserEnum.USER_EXIST.getCode(),UserEnum.USER_EXIST.getMsg());
+            resultData = new ResultData(UserEnum.USER_EXIST.getCode(),UserEnum.USER_EXIST.getMsg());
+            log.info("注册用户方法结束，出参={}",JSON.toJSONString(resultData));
+            return resultData;
         }
+        SysUser sysUser = userForm;
         String userId = UUIDUtils.createUUID();
         sysUser.setId(userId);
         Object obj = new SimpleHash(UserEnum.ENCRYPTION.getKey(), sysUser.getPassword(), userId, UserEnum.ENCRYPTION_TIMES.getCode());
@@ -72,9 +88,46 @@ public class UserServiceImpl implements UserService {
         sysUser.setCreateBy(userId);
         int result = userMapper.insertSelective(sysUser);
         if (result>0){
-            return new ResultData(UserEnum.REGISTER_SUCCESS.getCode(),UserEnum.REGISTER_SUCCESS.getMsg());
-        }
-        return new ResultData(UserEnum.REGISTER_ERROR.getCode(),UserEnum.REGISTER_ERROR.getMsg());
+            //验证传入角色并把用户角色对应插入数据库
+            String roleId = userForm.getRoleId().trim();
+            if (!roleId.equals(UserEnum.SUPER_ADMIN.getKey())&&!roleId.equals(UserEnum.ADMIN.getKey())&&!roleId.equals(UserEnum.USER.getKey())){
+                throw new RuntimeException("角色不存在！");
+            }
 
+            SysUserRoleKey sysUserRoleKey = new SysUserRoleKey();
+            sysUserRoleKey.setUserId(userId);
+            sysUserRoleKey.setRoleId(roleId);
+            int userRoleResult = sysUserRoleMapper.insert(sysUserRoleKey);
+            if (userRoleResult<=0){
+                throw new RuntimeException("角色关联失败！");
+            }
+
+            resultData = new ResultData(UserEnum.REGISTER_SUCCESS.getCode(),UserEnum.REGISTER_SUCCESS.getMsg());
+            log.info("注册用户方法结束，出参={}",JSON.toJSONString(resultData));
+            return resultData;
+        }
+        resultData = new ResultData(UserEnum.REGISTER_ERROR.getCode(),UserEnum.REGISTER_ERROR.getMsg());
+        log.info("注册用户方法结束，出参={}",JSON.toJSONString(resultData));
+        return resultData;
+
+    }
+
+
+    @Override
+    public ResultData updateLoginTime(String userId) {
+        log.info("更新最后登陆时间开始：入参={}",userId);
+        ResultData resultData = null;
+        SysUser sysUser = new SysUser();
+        sysUser.setId(userId);
+        sysUser.setLastLoginTime(new Date());
+        int result = userMapper.updateByPrimaryKeySelective(sysUser);
+        if (result>0){
+            resultData = new ResultData(UserEnum.UPDATE_SUCCESS.getCode(),UserEnum.UPDATE_SUCCESS.getMsg());
+            log.info("更新最后登陆时间结束：出参={}",JSON.toJSONString(resultData));
+            return resultData;
+        }
+        resultData = new ResultData(UserEnum.UPDATE_ERROR.getCode(),UserEnum.UPDATE_ERROR.getMsg());
+        log.info("更新最后登陆时间结束：出参={}",JSON.toJSONString(resultData));
+        return resultData;
     }
 }
