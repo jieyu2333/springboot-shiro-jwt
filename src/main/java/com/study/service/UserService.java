@@ -38,6 +38,13 @@ public interface UserService {
     ResultData saveUser(UserForm userForm);
 
     /**
+     * 删除用户信息
+     * @param userId
+     * @return
+     */
+    ResultData deleteUserById(String userId);
+
+    /**
      * @Author jieyu
      * @Description 更新登录时间
      * @Date 2018/12/18 13:58

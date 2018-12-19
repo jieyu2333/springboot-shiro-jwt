@@ -113,6 +113,30 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public ResultData deleteUserById(String userId) {
+        log.info("删除用户方法开始，入参={}",userId);
+        SysUser loginUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        ResultData resultData = null;
+        if (StringUtils.isBlank(userId)){
+            resultData = new ResultData(GlobalEnum.PARAM_NOT_NULL.getCode(),GlobalEnum.PARAM_NOT_NULL.getMsg());
+            log.info("删除用户方法结束，出参={}",JSON.toJSONString(resultData));
+            return resultData;
+        }
+        SysUser sysUser = new SysUser();
+        sysUser.setId(userId);
+        sysUser.setDelMark(GlobalEnum.DEL_MARK.getKey());
+        sysUser.setUpdateBy(loginUser.getId());
+        int result = userMapper.updateByPrimaryKeySelective(sysUser);
+        if (result<=0){
+            resultData = new ResultData(UserEnum.DELETE_ERROR.getCode(),UserEnum.DELETE_ERROR.getMsg());
+            log.info("删除用户方法结束，出参={}",JSON.toJSONString(resultData));
+            return resultData;
+        }
+        resultData = new ResultData(UserEnum.DELETE_SUCCESS.getCode(),UserEnum.DELETE_SUCCESS.getMsg());
+        log.info("删除用户方法结束，出参={}",JSON.toJSONString(resultData));
+        return resultData;
+    }
 
     @Override
     public ResultData updateLoginTime(String userId) {
