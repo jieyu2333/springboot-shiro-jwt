@@ -9,7 +9,11 @@ public enum GlobalEnum {
     NO_USE_MARK("N","停用"),
 
     DEL_MARK("1","删除"),
-    NO_DEL_MARK("0","未删除")
+    NO_DEL_MARK("0","未删除"),
+
+    ERROR_400(400,"错误"),
+    ERROR_404(404,"请求的网页不存在"),
+    ERROR_500(500,"服务器内部错误")
     ;
 
     private Integer code;

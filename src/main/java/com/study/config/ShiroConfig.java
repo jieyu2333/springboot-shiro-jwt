@@ -1,7 +1,6 @@
 package com.study.config;
 
 import com.study.common.UserEnum;
-import com.study.exception.MyExceptionHandler;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -206,12 +205,4 @@ public class ShiroConfig {
     }
 
 
-    /**
-     * 注册全局异常处理
-     * @return
-     */
-    @Bean(name = "exceptionHandler")
-    public HandlerExceptionResolver handlerExceptionResolver() {
-        return new MyExceptionHandler();
-    }
 }

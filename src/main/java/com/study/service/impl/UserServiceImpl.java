@@ -11,6 +11,7 @@ import com.study.dao.base.SysRoleMapper;
 import com.study.dao.base.SysUserMapper;
 import com.study.dao.base.SysUserRoleMapper;
 import com.study.dao.ext.SysUserRoleExtMapper;
+import com.study.exception.MyException;
 import com.study.form.UserForm;
 import com.study.model.base.SysUser;
 import com.study.model.base.SysUserExample;
@@ -91,7 +92,7 @@ public class UserServiceImpl implements UserService {
             //验证传入角色并把用户角色对应插入数据库
             String roleId = userForm.getRoleId().trim();
             if (!roleId.equals(UserEnum.SUPER_ADMIN.getKey())&&!roleId.equals(UserEnum.ADMIN.getKey())&&!roleId.equals(UserEnum.USER.getKey())){
-                throw new RuntimeException("角色不存在！");
+                throw new MyException(400,"角色不存在！");
             }
 
             SysUserRoleKey sysUserRoleKey = new SysUserRoleKey();
@@ -99,7 +100,7 @@ public class UserServiceImpl implements UserService {
             sysUserRoleKey.setRoleId(roleId);
             int userRoleResult = sysUserRoleMapper.insert(sysUserRoleKey);
             if (userRoleResult<=0){
-                throw new RuntimeException("角色关联失败！");
+                throw new MyException(400,"角色关联失败！");
             }
 
             resultData = new ResultData(UserEnum.REGISTER_SUCCESS.getCode(),UserEnum.REGISTER_SUCCESS.getMsg());

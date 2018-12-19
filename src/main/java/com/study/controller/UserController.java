@@ -49,7 +49,7 @@ public class UserController {
     @ApiOperation(value = "删除用户信息", notes = "删除用户信息")
     @RequestMapping(value = "delete/{id}",method = RequestMethod.POST)
     @RequiresRoles(value = {"superadmin","admin"},logical = Logical.OR)
-    @RequiresPermissions("sys:user:del")
+    @RequiresPermissions("sys:user:edit")
     public ResultData deleteUserById(@PathVariable("id") String id) {
         return null;
     }

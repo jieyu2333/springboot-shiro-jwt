@@ -1,6 +1,10 @@
 package com.study.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.study.common.GlobalEnum;
+import com.study.exception.MyException;
+import lombok.extern.slf4j.Slf4j;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -32,6 +36,7 @@ import java.util.Set;
  * @Range(min=,max=,message=)  被注释的元素必须在合适的范围内
  *
  */
+@Slf4j
 public class ValidationUtils {
     private static Validator validator;
     static {
@@ -40,8 +45,11 @@ public class ValidationUtils {
     }
 
     public static <T> void validator(T object) {
+        log.info("参数校验开始，入参={}", JSON.toJSONString(object));
         if (null == object) {
-            throw new RuntimeException(GlobalEnum.PARAM_NOT_NULL.getMsg());
+            MyException myException = new MyException(GlobalEnum.PARAM_NOT_NULL.getCode(),GlobalEnum.PARAM_NOT_NULL.getMsg());
+            log.info("参数校验结束，出参={}", JSON.toJSONString(myException));
+            throw myException;
         }
 
         Set<ConstraintViolation<T>> violations = validator.validate(object);
@@ -58,7 +66,10 @@ public class ValidationUtils {
             if (errMsg!=null){
                 lastErrMsg =  errMsg.toString().substring(0,errMsg.length()-1);
             }
-            throw new RuntimeException(lastErrMsg);
+            MyException myException = new MyException(GlobalEnum.PARAM_NOT_NULL.getCode(),lastErrMsg);
+            log.error("参数校验错误，错误信息={}",myException.getMsg());
+            log.info("参数校验结束");
+            throw myException;
         }
     }
 
