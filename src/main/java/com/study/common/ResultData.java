@@ -14,6 +14,8 @@ public class ResultData<T> {
 
     private String msg;
 
+    private T token;
+
     private T data;
 
     private List<T> record;
@@ -23,6 +25,7 @@ public class ResultData<T> {
     public ResultData() {
     }
 
+
     public ResultData(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
@@ -31,6 +34,13 @@ public class ResultData<T> {
     public ResultData(Integer code, String msg, T data) {
         this.code = code;
         this.msg = msg;
+        this.data = data;
+    }
+
+    public ResultData(Integer code, String msg, T data,T token) {
+        this.code = code;
+        this.msg = msg;
+        this.token = token;
         this.data = data;
     }
 
@@ -84,5 +94,13 @@ public class ResultData<T> {
 
     public void setPageInfo(PageInfo<T> pageInfo) {
         this.pageInfo = pageInfo;
+    }
+
+    public T getToken() {
+        return token;
+    }
+
+    public void setToken(T token) {
+        this.token = token;
     }
 }

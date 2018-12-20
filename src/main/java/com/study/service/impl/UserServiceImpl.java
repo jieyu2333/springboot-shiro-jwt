@@ -10,11 +10,13 @@ import com.study.common.form.BaseForm;
 import com.study.dao.base.SysRoleMapper;
 import com.study.dao.base.SysUserMapper;
 import com.study.dao.base.SysUserRoleMapper;
+import com.study.dao.ext.SysUserExtMapper;
 import com.study.dao.ext.SysUserRoleExtMapper;
 import com.study.exception.MyException;
 import com.study.form.UserForm;
 import com.study.model.base.SysUser;
 import com.study.model.base.SysUserExample;
+import com.study.model.base.SysUserRoleExample;
 import com.study.model.base.SysUserRoleKey;
 import com.study.service.UserService;
 import com.study.utils.StringUtils;
@@ -37,6 +39,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private SysUserMapper userMapper;
 
+    @Autowired
+    private SysUserExtMapper sysUserExtMapper;
+
 
     @Autowired
     private SysUserRoleMapper sysUserRoleMapper;
@@ -46,9 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultData<SysUser> listUsers() {
         log.info("用户查询开始");
-        SysUserExample sysUserExample = new SysUserExample();
-        sysUserExample.createCriteria().andUseMarkEqualTo(GlobalEnum.USE_MARK.getKey()).andDelMarkEqualTo(GlobalEnum.NO_DEL_MARK.getKey());
-        List<SysUser> list = userMapper.selectByExample(sysUserExample);
+        List<SysUser> list = sysUserExtMapper.listSysUser();
         ResultData<SysUser> resultData = new ResultData<>(UserEnum.SELECT_SUCCESS.getCode(),UserEnum.SELECT_SUCCESS.getMsg(),list);
         log.info("用户查询结束，出参={}",JSON.toJSONString(resultData));
         return resultData;
@@ -58,7 +61,7 @@ public class UserServiceImpl implements UserService {
     public ResultData<SysUser> pageUsers(BaseForm baseForm) {
         log.info("分页查询用户开始，入参={}",JSON.toJSONString(baseForm));
         PageHelper.startPage(baseForm.getPageNum(),baseForm.getPageSize());
-        List<SysUser> list = userMapper.selectByExample(new SysUserExample());
+        List<SysUser> list = sysUserExtMapper.listSysUser();
         PageInfo<SysUser> pageInfo = new PageInfo<>(list);
         ResultData<SysUser> resultData = new ResultData<>(UserEnum.SELECT_SUCCESS.getCode(),UserEnum.SELECT_SUCCESS.getMsg(),pageInfo);
         log.info("分页查询用户结束，出参={}",JSON.toJSONString(resultData));
@@ -114,6 +117,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public ResultData deleteUserById(String userId) {
         log.info("删除用户方法开始，入参={}",userId);
         SysUser loginUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
@@ -132,6 +136,13 @@ public class UserServiceImpl implements UserService {
             resultData = new ResultData(UserEnum.DELETE_ERROR.getCode(),UserEnum.DELETE_ERROR.getMsg());
             log.info("删除用户方法结束，出参={}",JSON.toJSONString(resultData));
             return resultData;
+        }
+        SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
+        sysUserRoleExample.createCriteria().andUserIdEqualTo(userId);
+
+        int delResult =  sysUserRoleMapper.deleteByExample(sysUserRoleExample);
+        if (delResult<=0){
+            throw new MyException(GlobalEnum.ERROR_500.getCode(),GlobalEnum.ERROR_500.getMsg());
         }
         resultData = new ResultData(UserEnum.DELETE_SUCCESS.getCode(),UserEnum.DELETE_SUCCESS.getMsg());
         log.info("删除用户方法结束，出参={}",JSON.toJSONString(resultData));
@@ -155,4 +166,5 @@ public class UserServiceImpl implements UserService {
         log.info("更新最后登陆时间结束：出参={}",JSON.toJSONString(resultData));
         return resultData;
     }
+
 }

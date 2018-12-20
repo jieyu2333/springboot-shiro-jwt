@@ -1,6 +1,7 @@
 package com.study.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.study.common.ResultData;
 import com.study.common.UserEnum;
 import com.study.model.base.SysUser;
@@ -18,7 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 /**
  * @ClassName LoginController
@@ -49,7 +51,8 @@ public class LoginController {
             SysUser sysUser = (SysUser) subject.getPrincipal();
             //更新最后登陆时间
             userService.updateLoginTime(sysUser.getId());
-            return new ResultData(UserEnum.SUCCESS_LOGIN.getCode(), UserEnum.SUCCESS_LOGIN.getMsg(),subject.getSession().getId());
+            sysUser.setPassword(null);
+            return new ResultData(UserEnum.SUCCESS_LOGIN.getCode(), UserEnum.SUCCESS_LOGIN.getMsg(),sysUser,subject.getSession().getId());
         } catch (UnknownAccountException e) {
             e.printStackTrace();
             return new ResultData(UserEnum.ERROR_ACCOUNT.getCode(), UserEnum.ERROR_ACCOUNT.getMsg());

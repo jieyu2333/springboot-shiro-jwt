@@ -76,7 +76,6 @@ public class MyRealm extends AuthorizingRealm {
         System.out.println("身份认证方法：MyRealm.doGetAuthenticationInfo()");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String userName = token.getUsername();
-        String password = new String((char[]) token.getPassword());
         SysUser user = null;
         // 从数据库获取对应用户名的用户
         SysUserExample sysUserExample = new SysUserExample();
