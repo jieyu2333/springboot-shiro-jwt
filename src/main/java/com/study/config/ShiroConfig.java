@@ -62,6 +62,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/login/**", "anon");
         filterChainDefinitionMap.put("/user/register","anon");
+        filterChainDefinitionMap.put("/area/**","anon");
         //swagger不拦截
         //swagger接口权限 开放
         filterChainDefinitionMap.put("/swagger-ui.html", "anon");

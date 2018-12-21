@@ -1,9 +1,11 @@
 package com.study.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.study.common.ResultData;
 import com.study.common.UserEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @Api(tags = "自定义shiro某些方法")
 @RestController
+@Slf4j
 public class ShiroController {
     /**
      * 重写shiro自带方法
@@ -27,7 +30,9 @@ public class ShiroController {
     @ApiOperation(value = "未登录初始化",notes = "未登录初始化")
     @RequestMapping(value = "/unauth", method = RequestMethod.GET)
     public ResultData unauth() {
-        return new ResultData(UserEnum.TO_LOGIN.getCode(), UserEnum.TO_LOGIN.getMsg());
+        ResultData resultData = new ResultData(UserEnum.TO_LOGIN.getCode(), UserEnum.TO_LOGIN.getMsg());
+        log.info("未登录，出参={}",JSON.toJSONString(resultData));
+        return resultData;
     }
 
 

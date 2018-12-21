@@ -1,6 +1,17 @@
 package com.study.common;
 
 public enum GlobalEnum {
+
+    SELECT_SUCCESS(200,"查询成功！"),
+    SELECT_ERROR(400,"查询失败！"),
+    SELECT_ERROR_NO_DATA(400,"查询失败,无数据！"),
+
+    UPDATE_SUCCESS(200,"更新成功！"),
+    UPDATE_ERROR(400,"更新失败！"),
+
+    DELETE_SUCCESS(200,"删除成功！"),
+    DELETE_ERROR(400,"删除失败！"),
+
     VALIDATE_MSG(400,"参数验证异常！"),
     PARAM_NOT_NULL(400,"参数不能为空！"),
 
@@ -13,7 +24,9 @@ public enum GlobalEnum {
 
     ERROR_400(400,"错误"),
     ERROR_404(404,"请求的网页不存在"),
-    ERROR_500(500,"服务器内部错误")
+    ERROR_500(500,"服务器内部错误"),
+
+    COUNTRY_ID(0,"中国")
     ;
 
     private Integer code;

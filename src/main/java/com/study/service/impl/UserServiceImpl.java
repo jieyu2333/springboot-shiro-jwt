@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     public ResultData<SysUser> listUsers() {
         log.info("用户查询开始");
         List<SysUser> list = sysUserExtMapper.listSysUser();
-        ResultData<SysUser> resultData = new ResultData<>(UserEnum.SELECT_SUCCESS.getCode(),UserEnum.SELECT_SUCCESS.getMsg(),list);
+        ResultData<SysUser> resultData = new ResultData<>(GlobalEnum.SELECT_SUCCESS.getCode(),GlobalEnum.SELECT_SUCCESS.getMsg(),list);
         log.info("用户查询结束，出参={}",JSON.toJSONString(resultData));
         return resultData;
     }
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(baseForm.getPageNum(),baseForm.getPageSize());
         List<SysUser> list = sysUserExtMapper.listSysUser();
         PageInfo<SysUser> pageInfo = new PageInfo<>(list);
-        ResultData<SysUser> resultData = new ResultData<>(UserEnum.SELECT_SUCCESS.getCode(),UserEnum.SELECT_SUCCESS.getMsg(),pageInfo);
+        ResultData<SysUser> resultData = new ResultData<>(GlobalEnum.SELECT_SUCCESS.getCode(),GlobalEnum.SELECT_SUCCESS.getMsg(),pageInfo);
         log.info("分页查询用户结束，出参={}",JSON.toJSONString(resultData));
         return resultData;
     }
@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
         sysUser.setUpdateBy(loginUser.getId());
         int result = userMapper.updateByPrimaryKeySelective(sysUser);
         if (result<=0){
-            resultData = new ResultData(UserEnum.DELETE_ERROR.getCode(),UserEnum.DELETE_ERROR.getMsg());
+            resultData = new ResultData(GlobalEnum.DELETE_ERROR.getCode(),GlobalEnum.DELETE_ERROR.getMsg());
             log.info("删除用户方法结束，出参={}",JSON.toJSONString(resultData));
             return resultData;
         }
@@ -144,7 +144,7 @@ public class UserServiceImpl implements UserService {
         if (delResult<=0){
             throw new MyException(GlobalEnum.ERROR_500.getCode(),GlobalEnum.ERROR_500.getMsg());
         }
-        resultData = new ResultData(UserEnum.DELETE_SUCCESS.getCode(),UserEnum.DELETE_SUCCESS.getMsg());
+        resultData = new ResultData(GlobalEnum.DELETE_SUCCESS.getCode(),GlobalEnum.DELETE_SUCCESS.getMsg());
         log.info("删除用户方法结束，出参={}",JSON.toJSONString(resultData));
         return resultData;
     }
@@ -158,11 +158,11 @@ public class UserServiceImpl implements UserService {
         sysUser.setLastLoginTime(new Date());
         int result = userMapper.updateByPrimaryKeySelective(sysUser);
         if (result>0){
-            resultData = new ResultData(UserEnum.UPDATE_SUCCESS.getCode(),UserEnum.UPDATE_SUCCESS.getMsg());
+            resultData = new ResultData(GlobalEnum.UPDATE_SUCCESS.getCode(),GlobalEnum.UPDATE_SUCCESS.getMsg());
             log.info("更新最后登陆时间结束：出参={}",JSON.toJSONString(resultData));
             return resultData;
         }
-        resultData = new ResultData(UserEnum.UPDATE_ERROR.getCode(),UserEnum.UPDATE_ERROR.getMsg());
+        resultData = new ResultData(GlobalEnum.UPDATE_ERROR.getCode(),GlobalEnum.UPDATE_ERROR.getMsg());
         log.info("更新最后登陆时间结束：出参={}",JSON.toJSONString(resultData));
         return resultData;
     }
