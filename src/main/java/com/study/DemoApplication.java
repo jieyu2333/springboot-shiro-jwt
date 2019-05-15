@@ -9,14 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-@MapperScan("com.study.dao")
-//@EnableScheduling
+@MapperScan(value = {"com.study.sys.mapper"})
 public class DemoApplication {
 
     /**
