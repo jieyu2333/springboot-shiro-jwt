@@ -1,5 +1,6 @@
 package com.study.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class Role implements Serializable {
     /**
      * 角色主键
      */
+    @TableId
     private String id;
 
     /**

@@ -1,5 +1,6 @@
 package com.study.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Data;
@@ -25,11 +26,13 @@ public class RoleMenu implements Serializable {
     /**
      * 角色编号
      */
+    @TableId
     private String roleId;
 
     /**
      * 菜单编号
      */
+    @TableId
     private String menuId;
 
 

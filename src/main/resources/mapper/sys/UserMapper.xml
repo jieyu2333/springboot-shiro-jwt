@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.sys.mapper.UserMapper">
 
+    <select id="selectPageByParam" resultType="com.study.sys.entity.User">
+        select id,user_name,name,use_mark,create_time from sys_user where 1=1 and del_mark=0
+      <if test="null != user and user.userName!=null and user.userName!=''">
+          and user_name like concat(#{user.userName},'%')
+      </if>
+
+    </select>
 </mapper>

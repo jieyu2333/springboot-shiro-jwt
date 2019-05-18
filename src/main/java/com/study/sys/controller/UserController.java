@@ -1,17 +1,15 @@
 package com.study.sys.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.study.common.ResultData;
 import com.study.sys.entity.User;
 import com.study.sys.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * <p>
@@ -23,14 +21,16 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sys/user")
+@Slf4j
 public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("getUserList")
-    public ResultData selectByParam(User user){
-        List<User> userList = userService.list(new QueryWrapper<User>());
-       return new ResultData(0,"查询用户成功",userList);
+    @PostMapping("getUserList")
+    public ResultData selectByParam(@RequestBody(required = false) Page page,@RequestBody(required = false) User user){
+        IPage<User> userList = userService.selectUserPage(page,user);
+        return new ResultData(0,"查询用户成功！",userList);
     }
+
 
 }

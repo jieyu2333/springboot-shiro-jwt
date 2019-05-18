@@ -1,5 +1,6 @@
 package com.study.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Data;
@@ -25,11 +26,13 @@ public class UserRole implements Serializable {
     /**
      * 用户主键
      */
+    @TableId
     private String userId;
 
     /**
      * 角色主键
      */
+    @TableId
     private String roleId;
 
 

@@ -1,6 +1,9 @@
 package com.study.sys.entity;
 
 import java.math.BigDecimal;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 import java.io.Serializable;
@@ -27,6 +30,7 @@ public class Menu implements Serializable {
     /**
      * 编号
      */
+    @TableId
     private String id;
 
     /**

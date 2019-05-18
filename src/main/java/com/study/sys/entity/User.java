@@ -1,11 +1,14 @@
 package com.study.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -26,6 +29,7 @@ public class User implements Serializable {
     /**
      * 用户主键
      */
+    @TableId
     private String id;
 
     /**
@@ -80,7 +84,9 @@ public class User implements Serializable {
 
     /**
      * 删除标记，1删除0未删除
+     * TableLogic注解：查询时默认 delMark = 0
      */
+    @TableLogic
     private String delMark;
 
     /**
