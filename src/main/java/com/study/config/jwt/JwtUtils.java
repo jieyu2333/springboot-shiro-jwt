@@ -7,9 +7,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.study.common.TokenInfo;
+import com.study.config.redis.RedisUtils;
 import com.study.exception.MyException;
-import com.study.sys.entity.UserToken;
-import com.study.sys.mapper.UserTokenMapper;
 import com.study.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ import java.util.Map;
 public class JwtUtils {
 
     @Autowired
-    private UserTokenMapper userTokenMapper;
+    private RedisUtils redisUtils;
 
     public static JwtUtils jwtUtils;
 
@@ -38,7 +37,7 @@ public class JwtUtils {
     /**
      * token过期时间15分钟
      */
-    private static final long EXPIRE_TIME = 1 * 60 * 1000;
+    private static final long EXPIRE_TIME = 2 * 60 * 1000;
 
     /**
      * token私钥
@@ -49,7 +48,7 @@ public class JwtUtils {
     /**
      * refresh_token过期时间7天
      */
-    private static final long REFRESH_EXPIRE_TIME = 2 * 60 * 1000;//7 * 24 * 60 * 60 * 1000;
+    private static final long REFRESH_EXPIRE_TIME = 4 * 60 * 1000;//7 * 24 * 60 * 60 * 1000;
 
     /**
      * refresh_token私钥
@@ -102,10 +101,12 @@ public class JwtUtils {
             //生成refreshToken
             String refreshToken = builder.withExpiresAt(refreshTokenExpireTime).sign(refreshTokenAlgorithm);
 
-            //先删除数据库中存储refreshToken再新增
-            jwtUtils.userTokenMapper.deleteById(userId);
-            UserToken userToken = new UserToken(userId, refreshToken, refreshTokenExpireTime);
-            jwtUtils.userTokenMapper.insert(userToken);
+            //refreshToken存入redis
+            String key = "userId"+userId;
+            boolean success =  jwtUtils.redisUtils.set(key,refreshToken,REFRESH_EXPIRE_TIME/1000);
+            if (!success){
+                throw new MyException("创建token失败");
+            }
 
             return new TokenInfo(token, refreshToken);
 
@@ -130,17 +131,10 @@ public class JwtUtils {
         Map<String, Claim> claimMap = verifyRefreshToken(refreshToken);
         String userId = claimMap.get("userId").asString();
         String userName = claimMap.get("userName").asString();
-        //查询数据库中refreshToken信息并验证
-        UserToken userToken = jwtUtils.userTokenMapper.selectById(userId);
-        if (null == userToken || !refreshToken.equals(userToken.getRefreshToken())){
-            //删除脏数据
-            jwtUtils.userTokenMapper.deleteById(userId);
-            throw new MyException("refresh_token 数据异常");
-        }
-        //判断数据库中refreshToken是否过期
-        if (new Date().compareTo(userToken.getRefreshTokenExpireTime()) >= 0){
-            //删除过期refreshToken
-            jwtUtils.userTokenMapper.deleteById(userId);
+
+        //验证redis中是否有此token
+        String key = "userId"+userId;
+        if (!refreshToken.equals(jwtUtils.redisUtils.get(key))){
             throw new MyException(1,"refreshToken已过期，请重新登陆！");
         }
 

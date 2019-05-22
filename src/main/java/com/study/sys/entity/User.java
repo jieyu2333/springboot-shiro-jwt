@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -92,12 +92,12 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 创建人
@@ -112,7 +112,7 @@ public class User implements Serializable {
     /**
      * 最后登陆时间
      */
-    private LocalDateTime lastLoginTime;
+    private Date lastLoginTime;
 
 
 }
