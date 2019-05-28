@@ -25,6 +25,12 @@ public interface IUserService extends IService<User> {
     ResultData checkUser(String userName,String password);
 
 
+    /**
+     * 根据条件分页查询用户信息
+     * @param page
+     * @param user
+     * @return
+     */
     IPage<User> selectUserPage(Page page,User user);
 
 

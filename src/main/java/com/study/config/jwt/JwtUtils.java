@@ -9,6 +9,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.study.common.TokenInfo;
 import com.study.config.redis.RedisUtils;
 import com.study.exception.MyException;
+import com.study.sys.entity.User;
+import com.study.sys.mapper.UserMapper;
 import com.study.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class JwtUtils {
 
     @Autowired
     private RedisUtils redisUtils;
+
+    @Autowired
+    private UserMapper userMapper;
 
     public static JwtUtils jwtUtils;
 
@@ -107,7 +112,11 @@ public class JwtUtils {
             if (!success){
                 throw new MyException("创建token失败");
             }
-
+            //更新最后登录时间
+            User user = new User();
+            user.setId(userId);
+            user.setLastLoginTime(new Date(nowTime));
+            jwtUtils.userMapper.updateById(user);
             return new TokenInfo(token, refreshToken);
 
         } catch (UnsupportedEncodingException e) {

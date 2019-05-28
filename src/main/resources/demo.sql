@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50724
+Source Server         : local_mysql
+Source Server Version : 50623
 Source Host           : localhost:3306
 Source Database       : demo
 
 Target Server Type    : MYSQL
-Target Server Version : 50724
+Target Server Version : 50623
 File Encoding         : 65001
 
-Date: 2018-12-20 17:13:05
+Date: 2019-05-28 20:02:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `sys_menu`
+-- Table structure for sys_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu` (
@@ -33,7 +33,7 @@ CREATE TABLE `sys_menu` (
   `create_by` varchar(32) CHARACTER SET utf8 NOT NULL COMMENT '创建者',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_by` varchar(32) CHARACTER SET utf8 NOT NULL COMMENT '更新者',
-  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `remarks` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '备注信息',
   `del_mark` char(1) CHARACTER SET utf8 NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`),
@@ -44,11 +44,11 @@ CREATE TABLE `sys_menu` (
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('1', '20', '0,1,2,13,20,', '查看', '30', null, null, null, '0', 'sys:user:view', '1', '2018-12-19 17:20:09', '1', '2018-12-19 17:20:09', null, '0');
-INSERT INTO `sys_menu` VALUES ('2', '20', '0,1,2,13,20,', '修改', '40', null, null, null, '0', 'sys:user:edit', '1', '2018-12-19 17:20:26', '1', '2018-12-19 17:20:26', null, '0');
+INSERT INTO `sys_menu` VALUES ('1', '20', '0,1,2,13,20,', '查看', '30', null, null, null, '0', 'sys:user:view', '1', '2018-12-19 23:05:17', '1', '2018-12-19 23:05:17', null, '0');
+INSERT INTO `sys_menu` VALUES ('2', '20', '0,1,2,13,20,', '修改', '40', null, null, null, '0', 'sys:user:edit', '1', '2018-12-19 23:05:21', '1', '2018-12-19 23:05:21', null, '0');
 
 -- ----------------------------
--- Table structure for `sys_role`
+-- Table structure for sys_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
@@ -73,7 +73,7 @@ INSERT INTO `sys_role` VALUES ('2', '管理员', 'admin', 'Y', '0', '2018-12-07 
 INSERT INTO `sys_role` VALUES ('3', '普通用户', 'user', 'Y', '0', '2018-12-07 17:17:25', '2018-12-07 17:17:25', '1', '1', null);
 
 -- ----------------------------
--- Table structure for `sys_role_menu`
+-- Table structure for sys_role_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu` (
@@ -91,7 +91,7 @@ INSERT INTO `sys_role_menu` VALUES ('2', '1');
 INSERT INTO `sys_role_menu` VALUES ('2', '2');
 
 -- ----------------------------
--- Table structure for `sys_user`
+-- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
@@ -112,19 +112,29 @@ CREATE TABLE `sys_user` (
   `create_by` varchar(32) DEFAULT NULL COMMENT '创建人',
   `update_by` varchar(32) DEFAULT NULL COMMENT '更新人',
   `last_login_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '最后登陆时间',
+  `salt` varchar(32) DEFAULT NULL COMMENT '盐值',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'ee74a75f182c46effa1a4b350d537566', '1', '1', '11', null, '1', '1', '11', 'Y', '0', '2018-12-05 16:56:13', '2018-12-20 16:42:30', '1', '1', '2018-12-20 16:42:30');
-INSERT INTO `sys_user` VALUES ('a351d57cc1e340d5a965145912d84d98', '1218', 'b3a67e61485ed524d00b42cd169fe0e0', null, null, null, null, null, null, null, 'Y', '0', '2018-12-18 10:38:36', '2018-12-20 16:40:08', 'a351d57cc1e340d5a965145912d84d98', null, '2018-12-20 16:40:08');
-INSERT INTO `sys_user` VALUES ('c625d02f84e940ae919b627c305cbaf8', '1219', 'b31e97b16f7a8a0318dc081e41df5547', null, null, null, null, null, null, null, 'Y', '0', '2018-12-19 15:30:45', '2018-12-20 16:02:02', 'c625d02f84e940ae919b627c305cbaf8', null, '2018-12-20 16:02:03');
-INSERT INTO `sys_user` VALUES ('f73d30daf47a43abba696d5e870c194f', 'qq957903902', 'db28cf75ceb2aed55b39d2389753491b', null, null, null, null, null, null, null, 'Y', '1', '2018-12-20 16:53:19', '2018-12-20 17:01:26', 'f73d30daf47a43abba696d5e870c194f', '1', '2018-12-20 17:01:26');
+INSERT INTO `sys_user` VALUES ('0b3c8b049eeb43a89769057bfca73405', 'jack0b3c8b049eeb43a89769057bfca73405', 'password', null, null, null, null, null, null, null, 'Y', '0', '2019-04-30 17:12:08', '2019-04-30 17:12:08', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('0db8c10fc96343eaa45ddc7fc1a11510', 'jack0db8c10fc96343eaa45ddc7fc1a11510', 'password', null, null, null, null, null, null, null, 'Y', '0', '2019-04-30 17:12:09', '2019-04-30 17:12:09', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('1', '11', '111', '1', '1', '11', null, '1', '1', '11', 'Y', '0', '2018-12-05 16:56:13', '2019-05-28 19:41:21', '1', '13dc0adc226d492e93a599bfdf90afa9', '2019-05-28 19:41:20', null);
+INSERT INTO `sys_user` VALUES ('163c9ff990594931b8b927038f8778f6', 'jack163c9ff990594931b8b927038f8778f6', 'password', null, null, null, null, null, null, null, 'Y', '0', '2019-04-30 17:12:09', '2019-04-30 17:12:09', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('1b7ef7518c724f03b73a718dfcad5f6f', 'jack1b7ef7518c724f03b73a718dfcad5f6f', 'password', null, null, null, null, null, null, null, 'Y', '0', '2019-04-30 17:12:08', '2019-04-30 17:12:08', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('2', '22', '111', '1', '1', '1', null, '1', '2', '11', 'Y', '0', '2018-12-05 16:56:26', '2018-12-06 14:17:29', '1', '4', '2018-12-16 01:10:03', null);
+INSERT INTO `sys_user` VALUES ('3', '33', '111', '1', '1', '1', null, '1', '1', '1', 'Y', '0', '2018-12-07 17:15:37', '2018-12-07 17:15:37', '1', '1', '2018-12-16 01:09:54', null);
+INSERT INTO `sys_user` VALUES ('3c88e78f5341417894ac31afdaa98b44', 'jack3c88e78f5341417894ac31afdaa98b44', 'password', null, null, null, null, null, null, null, 'Y', '0', '2019-04-30 17:12:09', '2019-04-30 17:12:09', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('450229556d7a465f9b2848e10894f215', 'jack450229556d7a465f9b2848e10894f215', 'password', null, null, null, null, null, null, null, 'Y', '0', '2019-04-30 17:12:08', '2019-04-30 17:12:08', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('661e12156e0849d5a9b157c25a7b1818', 'jack661e12156e0849d5a9b157c25a7b1818', 'password', null, null, null, null, null, null, null, 'Y', '0', '2019-04-30 17:12:09', '2019-04-30 17:12:09', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('69e8c8268d2541fc99fc3b14ed5cacdc', 'jack69e8c8268d2541fc99fc3b14ed5cacdc', 'password', null, null, null, null, null, null, null, 'Y', '0', '2019-04-30 17:12:09', '2019-04-30 17:12:09', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('734b8a507ea845a3b02c5e9145f28c11', 'jack734b8a507ea845a3b02c5e9145f28c11', 'password', null, null, null, null, null, null, null, 'Y', '0', '2019-04-30 17:12:08', '2019-04-30 17:12:08', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('e206d22001b143c2984581f33c23724b', 'jacke206d22001b143c2984581f33c23724b', 'password', null, null, null, null, null, null, null, 'Y', '0', '2019-04-30 17:12:08', '2019-04-30 17:12:08', null, null, null, null);
 
 -- ----------------------------
--- Table structure for `sys_user_role`
+-- Table structure for sys_user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role` (
@@ -137,6 +147,6 @@ CREATE TABLE `sys_user_role` (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', '1');
-INSERT INTO `sys_user_role` VALUES ('3c013550b994489ebfe09f9693aee452', '3');
-INSERT INTO `sys_user_role` VALUES ('c625d02f84e940ae919b627c305cbaf8', '2');
-INSERT INTO `sys_user_role` VALUES ('f73d30daf47a43abba696d5e870c194f', '3');
+INSERT INTO `sys_user_role` VALUES ('13dc0adc226d492e93a599bfdf90afa9', '2');
+INSERT INTO `sys_user_role` VALUES ('2', '2');
+INSERT INTO `sys_user_role` VALUES ('85b95619cce44034858d0f996a4132ec', '1');

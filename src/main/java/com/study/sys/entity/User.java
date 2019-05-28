@@ -114,5 +114,10 @@ public class User implements Serializable {
      */
     private Date lastLoginTime;
 
+    /**
+     * 盐值
+     */
+    private String salt;
+
 
 }

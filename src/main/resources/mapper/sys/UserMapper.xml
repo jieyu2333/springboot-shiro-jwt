@@ -9,4 +9,7 @@
       </if>
 
     </select>
+    <select id="selectByUserName" resultType="com.study.sys.entity.User">
+       select * from sys_user where user_name = #{userName} and del_mark = '0' limit 1
+    </select>
 </mapper>
