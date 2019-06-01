@@ -1,4 +1,4 @@
-package com.study.config.jwt;
+package com.study.config.shiro.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
@@ -6,7 +6,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.study.common.TokenInfo;
 import com.study.config.redis.RedisUtils;
 import com.study.exception.MyException;
 import com.study.sys.entity.User;

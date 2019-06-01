@@ -1,15 +1,13 @@
 package com.study.sys.controller;
 
 import com.study.common.ResultData;
-import com.study.common.TokenInfo;
-import com.study.config.jwt.JwtUtils;
+import com.study.config.shiro.jwt.TokenInfo;
+import com.study.config.shiro.jwt.JwtUtils;
 import com.study.sys.entity.User;
 import com.study.sys.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -46,5 +44,10 @@ public class LoginController {
         return new ResultData(0,"token get success",tokenInfo);
 
 
+    }
+
+    @GetMapping("/401")
+    public ResultData unauthorized() {
+        return new ResultData(401,"您没有访问权限！");
     }
 }

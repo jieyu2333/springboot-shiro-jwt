@@ -2,4 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.sys.mapper.UserRoleMapper">
 
+    <select id="selectRoleByUserId" resultType="com.study.sys.entity.UserRole">
+        SELECT
+          sur.*,sr.role
+        from
+          sys_user_role sur,sys_role sr
+        where
+          sur.role_id = sr.id and sr.del_mark = '0' and sr.use_mark = 'Y' and sur.user_id = #{userId} limit 1
+    </select>
 </mapper>

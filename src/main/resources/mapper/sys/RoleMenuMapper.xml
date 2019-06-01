@@ -2,4 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.sys.mapper.RoleMenuMapper">
 
+    <select id="listRoleMenusByUserId" resultType="com.study.sys.entity.RoleMenu">
+        SELECT
+          srm.*,sm.permission
+        from
+          sys_role_menu srm,sys_menu sm,sys_user_role sur
+        WHERE
+          srm.menu_id = sm.id and sm.del_mark = '0' and sur.role_id = srm.role_id and sur.user_id = #{userId}
+    </select>
 </mapper>

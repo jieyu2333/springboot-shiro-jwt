@@ -1,5 +1,6 @@
 package com.study.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -34,6 +35,12 @@ public class RoleMenu implements Serializable {
      */
     @TableId
     private String menuId;
+
+    /**
+     * 权限名（非数据库字段）
+     */
+    @TableField(exist = false)
+    private String permission;
 
 
 }

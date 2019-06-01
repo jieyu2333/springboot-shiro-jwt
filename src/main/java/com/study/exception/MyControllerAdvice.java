@@ -3,12 +3,24 @@ package com.study.exception;
 import com.study.common.ResultData;
 import com.study.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.ShiroException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @Slf4j
 public class MyControllerAdvice {
+
+    /**
+     * 捕捉shiro的异常
+     * @return
+     */
+    @ExceptionHandler(value = ShiroException.class)
+    public ResultData handle401(ShiroException e) {
+        ResultData resultData = new ResultData(401,"您没有访问权限！");
+        log.error("shiro异常："+e.getMessage());
+        return resultData;
+    }
 
     /**
      * 全局异常处理
